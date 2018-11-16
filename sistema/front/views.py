@@ -6,3 +6,9 @@ def Inicio(request):
 
 def ListaMascotas(request):
     return render(request,"mascotas.html")
+
+def quienes(request):
+    return render(request,'quienes.html',{})
+
+def contacto(request):
+    return render(request,'contacto.html',{})
