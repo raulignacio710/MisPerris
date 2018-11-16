@@ -9,29 +9,22 @@
 <div class="contenedor">
     <img class="banner" src="{% static 'images/banner_1.jpg' %}" width="150" alt="">
     <h1>Lista de las Mascotas Disponibles</h1>
-        <!-- la lista de mascotas con el paginator para darle orden y un estio con el css-->
-    {% if lista %}
+    <!-- la lista de mascotas con el paginator para darle orden y un estio con el css-->
     <table>
-        <tr class="titulos">
-            <th colspan="2">Mascota</th>
-            <th>Estado</th>
-            <th>Raza</th>
-            <th>Descripcion</th>
-        </tr>
-        {% for m in lista.object_list %}
-            <tr>
-                {% if m.estado == 'Disponible' %}
-                <td><img  src= {{ m.fotoMascota.url }} height="100" width="100" align=right/>  </td>
-                <td>{{ m.nombreMascota }}</td>
-                <td>{{ m.estado }}</td>
-                <td>{{ m.raza }}</td>
-                <td>{{ m.descripcion }}</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
+      <script type="text/javascript">
+          $(document).ready(function(){
+            $.ajax({url: "http://localhost:8000/Api/Mascotas", success: function(result){
+              $.each(result, function(i,items){
+                $("#lista").append("<tr>");
+                $("#lista").append("<td>" + result[i].nombreMascota + "</td>");
+                $("#lista").append("<td>" + result[i].raza + "</td>");
+                $("#lista").append("<td>" + result[i].descripcion + "</td>");
+                $("#lista").append("<td>" + result[i].estado + "</td>");
+                $("#lista").append("</tr>");
+              });
+            }});
+          });
+      </script>
     </table>
-    {% else %}
-        <h5>No hay Mascotas</h5>
-    {% endif %}
 </div>
 {% endblock %}
