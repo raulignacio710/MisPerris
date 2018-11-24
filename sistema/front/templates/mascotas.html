@@ -10,8 +10,8 @@
     <img class="banner" src="{% static 'images/banner_1.jpg' %}" width="150" alt="">
     <h1>Lista de las Mascotas Disponibles</h1>
     <!-- la lista de mascotas con el paginator para darle orden y un estio con el css-->
-    <<table>
-      <div id="jsonresp" style="margin-top: 100px">
+    <div id="jsonresp" style="margin-top: 100px">
+    <table>
         <tr class="titulos">
             <th colspan="2">Mascota</th>
             <th>Estado </th>
@@ -19,14 +19,14 @@
             <th>Descripcion</th>
         </tr>
         <tr>
-          <td><img  src=<span id="foto"></span> </td>
+          <td><span id="foto"></span> </td>
           <td><span id="nombre"></span></td>
           <td><span id="estado"></span></td>
           <td><span id="raza"></span></td>
           <td><span id="desc"></span></td>
         </tr>
-      </div>
-
+    </table>
+    </div>
     <script type="text/javascript">
 	$(document).ready(function(){
     $.ajax({
@@ -34,9 +34,8 @@
              dataType: "json",
              success : function (result) {
                $.each(result, function(i,items){
-                       $("#tabla").append("<td>" + result[i].codigoMascota + "</td>");
                        $("#cod").append("<td>" + result[i].codigoMascota + "</td>");
-                       $("#foto").append( result[i].fotoMascota );
+                       $("#foto").append("<img src='" + result[i].fotoMascota + "'height='100' width='100' align=right    />");
                        $("#nombre").append("<td>" + result[i].nombreMascota + "</td>");
                        $("#raza").append("<td>" + result[i].raza + "</td>");
                        $("#desc").append("<td>" + result[i].descripcion + "</td>");
@@ -45,7 +44,6 @@
                 }});
              });
 	</script>
-</table>
 </div>
 {% endblock %}
 
