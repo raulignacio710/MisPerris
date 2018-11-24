@@ -10,3 +10,7 @@ class MascotaView(APIView):
         masc=Mascota.objects.all()
         serializer=MascotaSerializer(masc,many=True)
         return Response(serializer.data)
+
+
+
+        

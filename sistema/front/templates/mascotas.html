@@ -10,23 +10,62 @@
     <img class="banner" src="{% static 'images/banner_1.jpg' %}" width="150" alt="">
     <h1>Lista de las Mascotas Disponibles</h1>
     <!-- la lista de mascotas con el paginator para darle orden y un estio con el css-->
-    <table>
-      <script type="text/javascript">
-          $(document).ready(function(){
-            $.ajax({url: "http://localhost:8000/Api/Mascotas", success: function(result){
-              $.each(result, function(i,items){
-                $("#lista").append("<tr>");
-                $("#lista").append("<td>" + result[i].codigoMascota + "</td>");
-                $("#lista").append("<td>" + result[i].fotoMascota + "</td>");  
-                $("#lista").append("<td>" + result[i].nombreMascota + "</td>");
-                $("#lista").append("<td>" + result[i].raza + "</td>");
-                $("#lista").append("<td>" + result[i].descripcion + "</td>");
-                $("#lista").append("<td>" + result[i].estado + "</td>");
-                $("#lista").append("</tr>");
-              });
-            }});
-          });
-      </script>
-    </table>
+    <<table>
+      <div id="jsonresp" style="margin-top: 100px">
+        <tr class="titulos">
+            <th colspan="2">Mascota</th>
+            <th>Estado </th>
+            <th>Raza</th>
+            <th>Descripcion</th>
+        </tr>
+        <tr>
+          <td><img  src=<span id="foto"></span> </td>
+          <td><span id="nombre"></span></td>
+          <td><span id="estado"></span></td>
+          <td><span id="raza"></span></td>
+          <td><span id="desc"></span></td>
+        </tr>
+      </div>
+
+    <script type="text/javascript">
+	$(document).ready(function(){
+    $.ajax({
+             url : "http://localhost:8000/Api/Mascotas",
+             dataType: "json",
+             success : function (result) {
+               $.each(result, function(i,items){
+                       $("#tabla").append("<td>" + result[i].codigoMascota + "</td>");
+                       $("#cod").append("<td>" + result[i].codigoMascota + "</td>");
+                       $("#foto").append( result[i].fotoMascota );
+                       $("#nombre").append("<td>" + result[i].nombreMascota + "</td>");
+                       $("#raza").append("<td>" + result[i].raza + "</td>");
+                       $("#desc").append("<td>" + result[i].descripcion + "</td>");
+                       $("#estado").append("<td>" + result[i].estado + "</td>");
+                  });
+                }});
+             });
+	</script>
+</table>
 </div>
 {% endblock %}
+
+
+<!-- <table>
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $.ajax({url: "http://localhost:8000/Api/Mascotas", success: function(result){
+          $.each(result, function(i,items){
+            $("#lista").append("<tr>");
+            $("#lista").append("<td>" + result[i].codigoMascota + "</td>");
+            $("#lista").append("<td>" + result[i].fotoMascota + "</td>");
+            $("#lista").append("<td>" + result[i].nombreMascota + "</td>");
+            $("#lista").append("<td>" + result[i].raza + "</td>");
+            $("#lista").append("<td>" + result[i].descripcion + "</td>");
+            $("#lista").append("<td>" + result[i].estado + "</td>");
+            $("#lista").append("</tr>");
+          });
+        }});
+      });
+  </script>
+</table>
+-->
