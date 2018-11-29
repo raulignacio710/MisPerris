@@ -12,7 +12,7 @@
     <table>
         <form method="POST">
             {% csrf_token %}
-            <table>
+            <table >
                 {% for field in form %}
                 <tr>
                     <th>{{ field.label_tag}}</th>
@@ -23,33 +23,8 @@
                 </tr>
                 {% endfor %}
             </table>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input  class="boton" type="submit" value="Ingresar">
+            <button class="boton" type="submit">Enviar</button>
         </form>
-        <!-- espacios en blanco-->
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      
-                <h5>¿No tienes cuenta? <a href="{% url 'registro'%}">Registrate</a></h5>
-                <h5>¿Olvidaste tu Contraseña? <a href="{% url 'recuperar'%}">Click Aqui</a></h5>
-        
-        <div class="row">
-            <div class="col left">
-                
-                <p><h3>
-                Tambien puedes Loguearte con la plataforma de Facebook
-                </h3></p>
-        </div>
-        
-        <div class="col right">
-        <form action="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">
-                <input type="submit" value="       Login Facebook" class="btn facebook" data-provider="facebook" ><i></i><span></span></button>
-        </form>
-        </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </table>
-    
-
-
-    
 </div>
 {% endblock %}
