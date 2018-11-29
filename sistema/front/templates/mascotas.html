@@ -11,20 +11,14 @@
     <h1>Lista de las Mascotas Disponibles</h1>
     <!-- la lista de mascotas con el paginator para darle orden y un estio con el css-->
     <div id="jsonresp" style="margin-top: 100px">
-    <table>
+    <table id=lista>
         <tr class="titulos">
             <th colspan="2">Mascota</th>
             <th>Estado </th>
             <th>Raza</th>
             <th>Descripcion</th>
         </tr>
-        <tr>
-          <td><span id="foto"></span> </td>
-          <td><span id="nombre"></span></td>
-          <td><span id="estado"></span></td>
-          <td><span id="raza"></span></td>
-          <td><span id="desc"></span></td>
-        </tr>
+
     </table>
     </div>
     <script type="text/javascript">
@@ -34,12 +28,9 @@
              dataType: "json",
              success : function (result) {
                $.each(result, function(i,items){
-                       $("#cod").append("<td>" + result[i].codigoMascota + "</td>");
-                       $("#foto").append("<img src='" + result[i].fotoMascota + "'height='100' width='100' align=right    />");
-                       $("#nombre").append("<td>" + result[i].nombreMascota + "</td>");
-                       $("#raza").append("<td>" + result[i].raza + "</td>");
-                       $("#desc").append("<td>" + result[i].descripcion + "</td>");
-                       $("#estado").append("<td>" + result[i].estado + "</td>");
+                       $("#lista").append("<tr>"+"<td>"+"<img src='" + result[i].fotoMascota + "'height='125' width='125' align=right    />"+ "</td>"
+                         + "<td>" + result[i].nombreMascota + "</td>" + "<td>" + result[i].raza + "</td>" +"<td>" + result[i].descripcion + "</td>" +
+                         "<td>" + result[i].estado + "</td>" + "</tr>");
                   });
                 }});
              });

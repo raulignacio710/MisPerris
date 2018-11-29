@@ -27,12 +27,12 @@
 				<a href="{% url 'contacto'%}">Contáctanos</a>
 				<a href="{% url 'Mascotas'%}">Mascotas</a>
 				{% if not user.is_authenticated %}
-				<a href="#">Iniciar Sesion</a>
+				<a href="{% url 'ingresar'%}">Iniciar Sesion</a>
 				{% else %}
 				{% if user.is_staff is True %}
-				<a href="#">Gestion de Mascotas</a>
+				<a href="{% url 'gestion'%}">Gestion de Mascotas</a>
 				{% endif %}
-				<a href="#">Salir</a>
+				<a href="{% url 'salir'%}">Salir</a>
 				{% endif %}
 			</nav>
 		</header>
