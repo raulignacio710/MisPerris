@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Mis Perris</title>
+    <meta name="description" content="Pagina completa con Flexbox"><!--Utilizamos el descriptor en meta para apoyar la busqueda de contenidos en la web-->
+    <meta name="viewport" content="width=device-widtg, user-scalable=no, initial-scale=1.0,maximun-scale=1.0,minimun-scale=1.0"><!--las escalas indican un punto inicial, la escala maxima y minima-->
+    <script src="{% static 'js/prefix.js' %}" type="test/javascript"></script><!--Script para asegurarq eu en todos los navegadores y dispositivos el sitio se vea igual-->
+	  <script src="{% static 'js/jquery.js' %}"></script> <!-- aqui se llama a el archivo javascript para que reconosca las sentencias de los demas js-->
+	  <link rel="stylesheet" href="{% static 'css/maqueta.css' %}"> <!-- aqui llamo al archivo de css para que los cambios visuales hechos por el sean realizados-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  {% block carrusel %}
+	  {% endblock %}
+</head>
+    <body>
+        <div class="contenedor">
+		<header>  <!-- de aqui en adelante es el header que tiene el logoel titulo y los botones principales de la pagina-->
+			<div class="logo">
+				<img src="{% static 'images/huella.png' %}" width="150" alt="">
+				<a href="#">Mis Perris</a>
+			</div>
+
+			<nav>
+				<a href="{% url 'Index'%}">Inicio</a>
+				<a href="{% url 'quienes'%}">Quienes somos</a>
+				<a href="{% url 'contacto'%}">Contáctanos</a>
+				<a href="{% url 'Mascotas'%}">Mascotas</a>
+				{% if not user.is_authenticated %}
+				<a href="{% url 'ingresar'%}">Iniciar Sesion</a>
+				{% else %}
+				{% if user.is_staff is True %}
+				<a href="{% url 'gestion'%}">Gestion de Mascotas</a>
+				{% endif %}
+				<a href="{% url 'salir'%}">Salir</a>
+				{% endif %}
+			</nav>
+		</header>
+        <div class='prueba'>
+            {% block contenido %}
+			{% endblock %}
+		</div>
+		<footer>
+			<h5 class="fin">Desarrollo Web y Mobile</h5>
+			<p class="validadores" align="center">
+				<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a>
+				<a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!" height="31" width="88"></a>
+			</p>
+
+		</footer>
+	</div>
+	<!-- aqui se llama al archivo js que contiene la programacion de las validaciones-->
+	<script  src="{% static 'js/formu.js' %}"></script>
+    </body>
+</html>
