@@ -1,0 +1,60 @@
+<!-- extiende de la maqueta-->
+{% extends "maqueta.html" %}
+<!--comienza el contenido que se señalo en la maqueta-->
+{% block contenido %}
+<!--se le informa a django que se cargaran archivos estaticos-->
+{% load staticfiles %}
+<!--se llama a el css de estilo correspondiente-->
+<link rel="stylesheet" href="{% static 'css/lista.css' %}">
+<div class="contenedor">
+    <img class="banner" src="{% static 'images/banner_1.jpg' %}" width="150" alt="">
+    <h1>Lista de las Mascotas Disponibles</h1>
+    <!-- la lista de mascotas con el paginator para darle orden y un estio con el css-->
+    <div id="jsonresp" style="margin-top: 100px">
+    <table id=lista>
+        <tr class="titulos">
+            <th colspan="2">Mascota</th>
+            <th>Estado </th>
+            <th>Raza</th>
+            <th>Descripcion</th>
+        </tr>
+
+    </table>
+    </div>
+    <script type="text/javascript">
+	$(document).ready(function(){
+    $.ajax({
+             url : "http://localhost:8000/Api/Mascotas",
+             dataType: "json",
+             success : function (result) {
+               $.each(result, function(i,items){
+                       $("#lista").append("<tr>"+"<td>"+"<img src='" + result[i].fotoMascota + "'height='125' width='125' align=right    />"+ "</td>"
+                         + "<td>" + result[i].nombreMascota + "</td>" + "<td>" + result[i].raza + "</td>" +"<td>" + result[i].descripcion + "</td>" +
+                         "<td>" + result[i].estado + "</td>" + "</tr>");
+                  });
+                }});
+             });
+	</script>
+</div>
+{% endblock %}
+
+
+<!-- <table>
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $.ajax({url: "http://localhost:8000/Api/Mascotas", success: function(result){
+          $.each(result, function(i,items){
+            $("#lista").append("<tr>");
+            $("#lista").append("<td>" + result[i].codigoMascota + "</td>");
+            $("#lista").append("<td>" + result[i].fotoMascota + "</td>");
+            $("#lista").append("<td>" + result[i].nombreMascota + "</td>");
+            $("#lista").append("<td>" + result[i].raza + "</td>");
+            $("#lista").append("<td>" + result[i].descripcion + "</td>");
+            $("#lista").append("<td>" + result[i].estado + "</td>");
+            $("#lista").append("</tr>");
+          });
+        }});
+      });
+  </script>
+</table>
+-->

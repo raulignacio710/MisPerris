@@ -1,0 +1,23 @@
+<!-- extiende de la maqueta-->
+{% extends "maqueta.html" %}
+<!--comienza el contenido que se señalo en la maqueta-->
+{% block contenido %}
+<!--se le informa a django que se cargaran archivos estaticos-->
+{% load staticfiles %}
+<!--se llama a el css de estilo correspondiente-->
+<link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+<!--dos div que contienen la parte escrita y una imagen-->	
+	<div class="contenedor">
+		<div class="contacto">
+			<h1 align=center>  Contacto </h1>
+            <h4>Si deseas contribuir a la causa o quieres saber mas sobre nosotros, puedes contactarnos con:</h4>
+            <h5>Email: MisPerris@adopcion.cl</h5>
+            <h5>Telefono: +56912345467</h5>
+            <h5>Direccion: Providencia 123, departamento 4f</h5>
+		</div>	
+		<div class="relleno">
+			<img src="{% static 'images/perrocontacto.jpg' %}" >
+		</div>
+	</div>
+	
+{% endblock %}
