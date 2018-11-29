@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from api.models import Usuario,Mascota
 from django.template import loader
-from .forms import AgregarUsuario,Login,Recuperar,CambiarPass
+from .forms import AgregarUsuario,Login,Recuperar,CambiarPass,RegistrarMascota,EliminarMascota,EditarMascota,EditarMascota2
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -26,7 +26,9 @@ def contacto(request):
 
 def gestion_mascota(request):
     return render(request,'gestion_masc.html',{})
-
+def maqueta_layout(request):
+	template='front/maqueta.html'
+	return render(request,template)
 #USUARIO
 
 # el registro de usuario con es como el visto en clases
@@ -95,3 +97,93 @@ def cambio(request):
 def salir(request):
     logout(request)
     return redirect("/")
+
+#MASCOTA
+
+# registro de mascota con el login requerido y ser administrador, ademas el id de la mascota siempre llenara el id que falte paramantener el orden
+@login_required(login_url='ingresar')
+def registrar_mascota(request):
+    form=RegistrarMascota(request.POST,request.FILES or None)
+    if form.is_valid():
+        data=form.cleaned_data
+        masc=Mascota(fotoMascota=request.FILES['fotoMascota'],nombreMascota=data.get("nombreMascota"),raza=data.get("raza"),descripcion=data.get("descripcion"),estado=data.get("estado"))
+        a=False
+        b=1
+        while a!=True:
+                if Mascota.objects.filter(codigoMascota=b).count()<=0:
+                    masc.codigoMascota=b
+                    masc.save()
+                    a=True
+                b=b+1
+        return redirect('gestion')
+    form=RegistrarMascota()
+    return render(request,'reg_mascota.html',{'form':form,})
+
+# eliminacion de mascotas con delete con formulario model choice y paginator
+def eliminar_mascota(request):
+    form=EliminarMascota(request.POST or None)
+    if form.is_valid():
+        data=form.cleaned_data
+        masc=data.get("mascotas")
+        masc.delete()
+        return redirect('gestion')
+    lista=Mascota.objects.all().order_by('codigoMascota')
+
+    paginator= Paginator(lista,60)
+    try:
+        pag=int(request.GET.get("page"),1)
+    except ValueError:
+        pag=1
+
+    try:
+        lista=paginator.page(pag)
+    except (InvalidPage,EmptyPage):
+        lista=paginator.page(paginator.num_pages)
+    form=EliminarMascota()
+    return render(request,'eliminar_masc.html',{'form':form,'lista':lista,})
+
+# edicion de mascotas con formulario model choice y paginator
+
+def editar_mascota(request):
+    form=EditarMascota(request.POST or None)
+    if form.is_valid():
+        data=form.cleaned_data
+        masco=data.get("mascotas")
+        global pk
+        pk=masco.codigoMascota
+        return redirect('editar2')
+    lista=Mascota.objects.all().order_by('codigoMascota')
+    paginator= Paginator(lista,60)
+    try:
+        pag=int(request.GET.get("page"),1)
+    except ValueError:
+        pag=1
+
+    try:
+        lista=paginator.page(pag)
+    except (InvalidPage,EmptyPage):
+        lista=paginator.page(paginator.num_pages)
+
+    form=EditarMascota()
+    return render(request,'editar_masc.html',{'form':form,'lista':lista,})
+#segunda ventana de edicion con el formulario
+
+def editar_mascota2(request):
+    form=EditarMascota2(request.POST or None)
+    if request.method=='POST':
+        if form.is_valid():
+            data=form.cleaned_data
+            masc=Mascota.objects.get(codigoMascota=pk)
+            masc.nombreMascota=data.get("nombreMascota")
+            masc.raza=data.get("raza")
+            masc.descripcion=data.get("descripcion")
+            masc.estado=data.get("estado")
+            masc.save()
+            return redirect("gestion")
+    else:
+        masc=Mascota.objects.get(codigoMascota=pk)
+        data2={"nombreMascota":masc.nombreMascota,"raza":masc.raza,"descripcion":masc.descripcion,"estado":masc.estado,}
+        form=EditarMascota2(data2)
+    #form=EditarMascota2()
+    return render(request,'editar_masc2.html',{'form':form,'data2':data2,})
+#la lista de mascotas con paginator y foto

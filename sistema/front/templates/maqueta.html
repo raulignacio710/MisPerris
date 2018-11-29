@@ -1,5 +1,7 @@
-{% load staticfiles %}
 <!doctype html>
+{% load staticfiles %}
+{% load pwa %}
+{% load static %}
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -10,6 +12,7 @@
 	  <script src="{% static 'js/jquery.js' %}"></script> <!-- aqui se llama a el archivo javascript para que reconosca las sentencias de los demas js-->
 	  <link rel="stylesheet" href="{% static 'css/maqueta.css' %}"> <!-- aqui llamo al archivo de css para que los cambios visuales hechos por el sean realizados-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {% progressive_web_app_meta %}
 	  {% block carrusel %}
 	  {% endblock %}
 </head>
