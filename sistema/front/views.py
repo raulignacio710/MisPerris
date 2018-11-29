@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator,InvalidPage,EmptyPage
 from django.views.generic import CreateView, DeleteView, TemplateView, UpdateView, ListView, DetailView
 from django.contrib import messages
+import json
 
 # Create your views here.
 def Inicio(request):
@@ -26,6 +27,7 @@ def contacto(request):
 
 def gestion_mascota(request):
     return render(request,'gestion_masc.html',{})
+
 def maqueta_layout(request):
 	template='front/maqueta.html'
 	return render(request,template)
