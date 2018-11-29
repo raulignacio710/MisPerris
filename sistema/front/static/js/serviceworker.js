@@ -13,7 +13,7 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   var requestUrl = new URL(event.request.url);
     if (requestUrl.origin === location.origin) {
-      if ((requestUrl.pathname === 'http://localhost:8000/')) {
+      if ((requestUrl.pathname === '/Index')) {
         event.respondWith(caches.match('/maqueta_layout'));
         return;
       }
