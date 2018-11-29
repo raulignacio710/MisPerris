@@ -11,4 +11,8 @@ urlpatterns=[
     url(r'^CambioPassword$',views.cambio,name='cambio'),
     url(r'^GestionMascota$',views.gestion_mascota,name='gestion'),
     url(r'^Salir$',views.salir,name='salir'),
+    url(r'^RegistroMascota$',views.registrar_mascota,name='reg_masc'),
+    url(r'^EliminarMascota$',views.eliminar_mascota,name='eliminar'),
+    url(r'^EditarMascotaSegundo$',views.editar_mascota2,name='editar2'),
+    url(r'^EditarMascota$',views.editar_mascota,name='editar'),
 ]
