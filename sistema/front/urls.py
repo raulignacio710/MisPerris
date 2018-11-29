@@ -15,5 +15,5 @@ urlpatterns=[
     url(r'^EliminarMascota$',views.eliminar_mascota,name='eliminar'),
     url(r'^EditarMascotaSegundo$',views.editar_mascota2,name='editar2'),
     url(r'^EditarMascota$',views.editar_mascota,name='editar'),
-    url(r'^maqueta_layout$',views.maqueta_layout,name='cachework'),
+    url(r'^maqueta_layout$',views.maqueta_layout,name='maqueta_layout'),
 ]

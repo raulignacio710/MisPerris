@@ -31,6 +31,10 @@ def gestion_mascota(request):
 def maqueta_layout(request):
 	template='front/maqueta.html'
 	return render(request,template)
+def getdata(request):
+  results=Mascota.objects.all()
+  jsondata = serializers.serialize('json',results)
+  return HttpResponse(jsondata)
 #USUARIO
 
 # el registro de usuario con es como el visto en clases
