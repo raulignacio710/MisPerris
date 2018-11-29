@@ -1,0 +1,70 @@
+{% extends "maqueta.html" %}
+{% block carrusel %}
+{% load staticfiles %}
+    <script src="{% static 'js/carruselcito.js' %}"></script>
+    <script src="{% static 'js/jquery.bxslider.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/jquery.bxslider.css' %}">
+{% endblock %}    
+{% block contenido %}
+{% load staticfiles %}
+<div class="bloque">
+<section class="main">
+        <!-- aqui esta el carrusel junto con sus imagenes-->
+        <div id=carrusel align=center>
+            <img src="{% static 'images/adop1.jpg' %}" width="150" alt="">
+            <img src="{% static 'images/adop2.jpg' %}" width="150" alt="">
+            <img src="{% static 'images/adop3.jpg' %}" width="150" alt="">
+        </div>
+        <!-- aqui estan los iconos de redes sociales-->
+        <div class="redsocial" align=center>
+                <a href="http://www.facebook.com"><img src="https://png.icons8.com/plasticine/50/000000/facebook.png"></a>
+                <a href="http://www.instagram.com"><img src="https://png.icons8.com/plasticine/50/000000/instagram-new.png"></a>
+                <a href="http://plus.google.com"><img src="https://png.icons8.com/plasticine/50/000000/google-plus.png"></a>
+                <a href="http://www.twitter.com"><img src="https://png.icons8.com/plasticine/50/000000/twitter.png"></a>
+        </div>
+        
+        <!-- aqui vienen los dos articulos que contienen los textos de la pagina principal-->
+        
+        <article>
+            
+            <!--aqui utilice los articulos del flex para editarlos y poner la informacion de la pagina de perris-->
+            <h2 class="titulo">RESCATE</h2>
+            <h4 class="subtitulo">ETAPA UNO</h4>
+            <p>Rescatamos perros en situacion de peligro y/o abandono.
+               Los Rehabilitamos y los preparamos para buscarles un hogar.</p>
+        </article>
+        <!--agregue fotos entre los articulos ya que en la imagen de muestra de perris esta de esa manera-->
+        <div class="foto1">
+            <img style="float: right" src="{% static 'images/imagen1.jpg' %}" width="150" alt="">
+        </div>
+        <div class="foto2">
+            <img src="{% static 'images/imagen2.jpg' %}" width="150" alt="">
+        </div>
+        <article>
+            <h2 class="titulo2">CROWDFUNDING</h2>
+            <h4 class="subtitulo2">FINANCIAMIENTO</h4>
+            <p>Sigue nuestras redes sociales para informarte acerca de diversas campañas
+               y actividades que realizamos  para obtener financiamento para seguir ayudando.</p>
+        </article>
+        <input class="boton_camp" type="button" value="CAMPAÑAS">
+    </section>
+    <!-- segundo contenedor que tiene el colache de fotos-->
+    <div class="contenedor2">
+        <div class="caja">
+               <img src="{% static 'images/perro1.jpg' %}" width="Nueve" >
+               <img src="{% static 'images/perro2.jpg' %}" width="Nueve" >
+               <img src="{% static 'images/perro3.jpg' %}" width="Nueve" >
+        </div>
+        <div class="caja largo">
+                <img src="{% static 'images/perro4.jpg' %}" width="Nueve" >
+                <img src="{% static 'images/perro5.jpg' %}" width="Nueve" > 
+        </div>
+        <div class="caja">
+                <img src="{% static 'images/perro6.jpg' %}" width="Nueve" style="height:62%">
+                <img src="{% static 'images/perro7.jpg' %}" width="Nueve" >
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+

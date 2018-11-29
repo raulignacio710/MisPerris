@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'front/static/js', 'serviceworker.js')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -40,12 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'api.apps.ApiConfig',
     'front.apps.FrontConfig',
-    'pwa',
+    'social_django',
 ]
-AUTHENTICATION_BACKENDS = [
-	'social_core.backends.facebook.FacebookOAuth2',
-   	'django.contrib.auth.backends.ModelBackend',
-]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,6 +52,28 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+
+
+AUTHENTICATION_BACKENDS = [
+	'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+   	'django.contrib.auth.backends.ModelBackend',
+]
+
+
+SOCIAL_AUTH_FACEBOOK_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_FACEBOOK_SCOPE = [
+    'email'
+]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '271996170170952'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'eb963eb5d677b016c3aebac1c728c16b'
+
+
+SOCIAL_AUTH_GITHUB_KEY = '00cb33373d3152137aae'
+SOCIAL_AUTH_GITHUB_SECRET = '0af0318e4d473e010788af84281e4991912eb40d'
 
 ROOT_URLCONF = 'sistema.urls'
 
@@ -68,13 +87,27 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
-                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',  # <--- este
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
 
 WSGI_APPLICATION = 'sistema.wsgi.application'
 
