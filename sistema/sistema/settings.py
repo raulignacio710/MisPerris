@@ -41,11 +41,14 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'front.apps.FrontConfig',
     'pwa',
+    'social_django',
 ]
 AUTHENTICATION_BACKENDS = [
 	'social_core.backends.facebook.FacebookOAuth2',
    	'django.contrib.auth.backends.ModelBackend',
 ]
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,6 +58,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SOCIAL_AUTH_FACEBOOK_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_FACEBOOK_SCOPE = [
+    'email'
+]
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '271996170170952'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'eb963eb5d677b016c3aebac1c728c16b'
 
 ROOT_URLCONF = 'sistema.urls'
 
@@ -71,6 +83,7 @@ TEMPLATES = [
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
